@@ -1,0 +1,6 @@
+@HairDesk.Api_HostAddress = http://localhost:5074
+
+GET {{HairDesk.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

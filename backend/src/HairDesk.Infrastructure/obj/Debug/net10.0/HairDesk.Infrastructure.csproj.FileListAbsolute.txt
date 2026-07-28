@@ -1,0 +1,17 @@
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\bin\Debug\net10.0\HairDesk.Infrastructure.deps.json
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\bin\Debug\net10.0\HairDesk.Infrastructure.dll
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\bin\Debug\net10.0\HairDesk.Infrastructure.pdb
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\bin\Debug\net10.0\HairDesk.Application.dll
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\bin\Debug\net10.0\HairDesk.Domain.dll
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\bin\Debug\net10.0\HairDesk.Application.pdb
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\bin\Debug\net10.0\HairDesk.Domain.pdb
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\obj\Debug\net10.0\HairDesk.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\obj\Debug\net10.0\HairDesk.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\obj\Debug\net10.0\HairDesk.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\obj\Debug\net10.0\HairDesk.Infrastructure.AssemblyInfo.cs
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\obj\Debug\net10.0\HairDesk.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\obj\Debug\net10.0\HairDesk.893D570F.Up2Date
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\obj\Debug\net10.0\HairDesk.Infrastructure.dll
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\obj\Debug\net10.0\refint\HairDesk.Infrastructure.dll
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\obj\Debug\net10.0\HairDesk.Infrastructure.pdb
+C:\Users\biele\Desktop\Programing Stuff\repos\hairdesk\backend\src\HairDesk.Infrastructure\obj\Debug\net10.0\ref\HairDesk.Infrastructure.dll

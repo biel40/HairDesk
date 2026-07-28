@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/HairDesk.Api/HairDesk.Api.csproj" />
+    <Project Path="src/HairDesk.Application/HairDesk.Application.csproj" />
+    <Project Path="src/HairDesk.Domain/HairDesk.Domain.csproj" />
+    <Project Path="src/HairDesk.Infrastructure/HairDesk.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/HairDesk.IntegrationTests/HairDesk.IntegrationTests.csproj" />
+    <Project Path="tests/HairDesk.UnitTests/HairDesk.UnitTests.csproj" />
+  </Folder>
+</Solution>
