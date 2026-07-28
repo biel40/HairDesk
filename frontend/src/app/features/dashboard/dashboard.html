@@ -1,0 +1,40 @@
+<header class="page-header">
+  <div class="page-header__text">
+    <h1>{{ greeting() }}</h1>
+    <p class="page-header__date">{{ todayLabel }}</p>
+  </div>
+
+  <button type="button" class="hd-button hd-button--primary" (click)="createAppointment()">
+    <app-icon name="plus" />
+    Nueva cita
+  </button>
+</header>
+
+@if (notice(); as message) {
+  <p class="notice" role="status">{{ message }}</p>
+}
+
+<section class="stats" aria-labelledby="titulo-resumen">
+  <h2 id="titulo-resumen" class="hd-visually-hidden">Resumen del día</h2>
+  <ul class="stats__grid">
+    @for (card of summaryCards(); track card.label) {
+      <li>
+        <app-stat-card
+          [label]="card.label"
+          [value]="card.value"
+          [icon]="card.icon"
+          [hint]="card.hint"
+        />
+      </li>
+    }
+  </ul>
+</section>
+
+<section class="hd-card appointments" aria-labelledby="titulo-citas">
+  <header class="appointments__header">
+    <h2 id="titulo-citas">Citas de hoy</h2>
+    <p class="appointments__count">{{ appointmentsCountLabel() }}</p>
+  </header>
+
+  <app-appointment-list [appointments]="appointments()" (createRequested)="createAppointment()" />
+</section>

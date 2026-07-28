@@ -1,0 +1,128 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 1.25rem 1rem;
+  gap: 1.5rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 0.35rem;
+}
+
+.brand__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--hd-radius-md);
+  background-color: var(--hd-accent);
+  color: var(--hd-on-accent);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+}
+
+.brand__text {
+  display: grid;
+  min-width: 0;
+}
+
+.brand__product {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.brand__salon {
+  font-size: 0.8125rem;
+  color: var(--hd-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav {
+  flex: 1 1 auto;
+  overflow-y: auto;
+}
+
+.nav ul {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.nav__link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: var(--hd-radius-sm);
+  color: var(--hd-text);
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.nav__link app-icon {
+  color: var(--hd-text-muted);
+}
+
+.nav__link:hover {
+  background-color: var(--hd-surface-muted);
+}
+
+.nav__link--active {
+  background-color: var(--hd-accent-soft);
+  color: var(--hd-accent);
+  font-weight: 600;
+}
+
+.nav__link--active app-icon {
+  color: var(--hd-accent);
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-top: 1px solid var(--hd-border);
+}
+
+.user__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background-color: var(--hd-surface-muted);
+  color: var(--hd-text);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.user__text {
+  display: grid;
+  min-width: 0;
+}
+
+.user__name {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user__role {
+  font-size: 0.8125rem;
+  color: var(--hd-text-muted);
+}

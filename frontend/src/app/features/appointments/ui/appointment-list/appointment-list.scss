@@ -1,0 +1,76 @@
+:host {
+  display: block;
+}
+
+.list {
+  display: grid;
+}
+
+.appointment {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'time status'
+    'details details';
+  align-items: center;
+  gap: 0.35rem 0.9rem;
+  padding: 0.9rem 1rem;
+  border-top: 1px solid var(--hd-border);
+  transition: background-color 0.15s ease;
+}
+
+.appointment:first-child {
+  border-top: 0;
+}
+
+.appointment:hover {
+  background-color: var(--hd-surface-muted);
+}
+
+.appointment__time {
+  grid-area: time;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.appointment__time app-icon {
+  color: var(--hd-text-muted);
+  width: 1rem;
+  height: 1rem;
+}
+
+.appointment__details {
+  grid-area: details;
+  min-width: 0;
+}
+
+.appointment__client {
+  font-weight: 600;
+}
+
+.appointment__service {
+  color: var(--hd-text-muted);
+  font-size: 0.9375rem;
+}
+
+.appointment__duration::before {
+  content: '·';
+  margin-inline: 0.3rem;
+}
+
+.appointment__status {
+  grid-area: status;
+  justify-self: end;
+}
+
+@media (min-width: 40rem) {
+  .appointment {
+    grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+    grid-template-areas: 'time details status';
+    gap: 1rem;
+    padding: 0.9rem 1.25rem;
+  }
+}

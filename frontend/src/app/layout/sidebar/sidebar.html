@@ -1,0 +1,35 @@
+<div class="brand">
+  <span class="brand__mark" aria-hidden="true">HD</span>
+  <span class="brand__text">
+    <span class="brand__product">HairDesk</span>
+    <span class="brand__salon">{{ salon().name }}</span>
+  </span>
+</div>
+
+<nav class="nav" aria-label="Navegación principal">
+  <ul>
+    @for (item of navItems; track item.path) {
+      <li>
+        <a
+          class="nav__link"
+          [routerLink]="item.path"
+          routerLinkActive="nav__link--active"
+          #link="routerLinkActive"
+          [attr.aria-current]="link.isActive ? 'page' : null"
+          (click)="navigated.emit()"
+        >
+          <app-icon [name]="item.icon" />
+          <span>{{ item.label }}</span>
+        </a>
+      </li>
+    }
+  </ul>
+</nav>
+
+<div class="user">
+  <span class="user__avatar" aria-hidden="true">{{ userInitials() }}</span>
+  <span class="user__text">
+    <span class="user__name">{{ userFullName() }}</span>
+    <span class="user__role">{{ user().role }}</span>
+  </span>
+</div>

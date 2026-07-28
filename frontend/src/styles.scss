@@ -1,1 +1,164 @@
-/* You can add global styles to this file, and also import other style files */
+/* HairDesk — estilos globales y sistema de diseño */
+
+:root {
+  /* Superficies y neutros cálidos en oscuro */
+  --hd-bg: #141110;
+  --hd-surface: #1d1917;
+  --hd-surface-muted: #2a2421;
+  --hd-border: #322b27;
+  --hd-border-strong: #463c36;
+
+  /* Texto */
+  --hd-text: #f3ede8;
+  --hd-text-muted: #a99d94;
+
+  /* Acento terracota */
+  --hd-accent: #e08a6d;
+  --hd-accent-hover: #eda184;
+  --hd-accent-soft: #33231d;
+  --hd-on-accent: #1b120e;
+
+  /* Estados */
+  --hd-success-bg: #17301f;
+  --hd-success-text: #8ed7a9;
+  --hd-warning-bg: #33270f;
+  --hd-warning-text: #f0c674;
+  --hd-neutral-bg: #262629;
+  --hd-neutral-text: #b8bcc3;
+
+  /* Velo del menú móvil */
+  --hd-overlay: rgb(0 0 0 / 65%);
+
+  /* Escala y forma */
+  --hd-radius-sm: 8px;
+  --hd-radius-md: 12px;
+  --hd-radius-lg: 16px;
+  --hd-shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
+  --hd-shadow-md: 0 10px 30px rgb(0 0 0 / 45%);
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--hd-bg);
+  color: var(--hd-text);
+  font-family:
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    'Helvetica Neue',
+    sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: var(--hd-accent);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--hd-accent);
+  outline-offset: 2px;
+}
+
+/* Botones reutilizables */
+.hd-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: var(--hd-radius-sm);
+  font-weight: 600;
+  line-height: 1.25;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.hd-button--primary {
+  background-color: var(--hd-accent);
+  color: var(--hd-on-accent);
+}
+
+.hd-button--primary:hover {
+  background-color: var(--hd-accent-hover);
+}
+
+.hd-button--ghost {
+  background-color: var(--hd-surface);
+  border-color: var(--hd-border-strong);
+  color: var(--hd-text);
+}
+
+.hd-button--ghost:hover {
+  background-color: var(--hd-surface-muted);
+}
+
+/* Tarjetas reutilizables */
+.hd-card {
+  background-color: var(--hd-surface);
+  border: 1px solid var(--hd-border);
+  border-radius: var(--hd-radius-lg);
+  box-shadow: var(--hd-shadow-sm);
+}
+
+.hd-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

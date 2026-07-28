@@ -1,0 +1,154 @@
+:host {
+  display: block;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  inset-inline-start: 0.5rem;
+  z-index: 60;
+  padding: 0.6rem 1rem;
+  border-radius: var(--hd-radius-sm);
+  background-color: var(--hd-surface);
+  box-shadow: var(--hd-shadow-md);
+  font-weight: 600;
+  transform: translateY(-150%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+.layout {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100dvh;
+}
+
+/* Barra superior (solo móvil / tablet) */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--hd-surface);
+  border-bottom: 1px solid var(--hd-border);
+}
+
+.topbar__button,
+.drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid var(--hd-border);
+  border-radius: var(--hd-radius-sm);
+  background-color: var(--hd-surface);
+  color: var(--hd-text);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.topbar__button:hover,
+.drawer__close:hover {
+  background-color: var(--hd-surface-muted);
+}
+
+.topbar__brand {
+  display: grid;
+  min-width: 0;
+}
+
+.topbar__product {
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.topbar__salon {
+  font-size: 0.8125rem;
+  color: var(--hd-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Menú lateral: cajón deslizante en móvil */
+.drawer {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 0;
+  z-index: 40;
+  width: min(280px, 85vw);
+  background-color: var(--hd-surface);
+  border-inline-end: 1px solid var(--hd-border);
+  visibility: hidden;
+  transform: translateX(-100%);
+  transition:
+    transform 0.2s ease,
+    visibility 0.2s ease;
+}
+
+.drawer--open {
+  visibility: visible;
+  transform: none;
+  box-shadow: var(--hd-shadow-md);
+}
+
+.drawer__close {
+  position: absolute;
+  top: 0.85rem;
+  inset-inline-end: 0.85rem;
+  z-index: 1;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  background-color: var(--hd-overlay);
+}
+
+.content {
+  min-width: 0;
+  padding: 1.25rem 1rem 3rem;
+}
+
+.content:focus {
+  outline: none;
+}
+
+@media (min-width: 64rem) {
+  .layout {
+    grid-template-columns: 264px minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .topbar {
+    display: none;
+  }
+
+  .drawer {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    width: auto;
+    height: 100dvh;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    transition: none;
+  }
+
+  .drawer__close {
+    display: none;
+  }
+
+  .content {
+    padding: 2rem 2.5rem 3.5rem;
+  }
+}

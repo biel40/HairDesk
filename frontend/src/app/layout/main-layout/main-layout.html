@@ -1,0 +1,39 @@
+<a class="skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+<div class="layout">
+  <header class="topbar">
+    <button
+      #toggleButton
+      type="button"
+      class="topbar__button"
+      aria-controls="menu-lateral"
+      [attr.aria-expanded]="menuOpen()"
+      (click)="toggleMenu()"
+    >
+      <app-icon name="menu" />
+      <span class="hd-visually-hidden">Abrir menú de navegación</span>
+    </button>
+
+    <span class="topbar__brand">
+      <span class="topbar__product">HairDesk</span>
+      <span class="topbar__salon">{{ salon().name }}</span>
+    </span>
+  </header>
+
+  <aside id="menu-lateral" class="drawer" [class.drawer--open]="menuOpen()">
+    <button #closeButton type="button" class="drawer__close" (click)="closeMenu()">
+      <app-icon name="close" />
+      <span class="hd-visually-hidden">Cerrar menú de navegación</span>
+    </button>
+
+    <app-sidebar [salon]="salon()" [user]="user()" (navigated)="closeMenu()" />
+  </aside>
+
+  @if (menuOpen()) {
+    <div class="backdrop" aria-hidden="true" (click)="closeMenu()"></div>
+  }
+
+  <main id="contenido-principal" class="content" tabindex="-1">
+    <router-outlet />
+  </main>
+</div>

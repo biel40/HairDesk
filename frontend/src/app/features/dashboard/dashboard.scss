@@ -1,0 +1,68 @@
+:host {
+  display: block;
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.page-header__date {
+  color: var(--hd-text-muted);
+}
+
+.notice {
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--hd-border);
+  border-radius: var(--hd-radius-sm);
+  background-color: var(--hd-accent-soft);
+  color: var(--hd-accent);
+  font-size: 0.9375rem;
+}
+
+.stats {
+  margin-bottom: 1.75rem;
+}
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1rem;
+}
+
+.appointments__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 1.15rem 1.25rem;
+  border-bottom: 1px solid var(--hd-border);
+}
+
+.appointments__header h2 {
+  font-size: 1.125rem;
+}
+
+.appointments__count {
+  color: var(--hd-text-muted);
+  font-size: 0.9375rem;
+}
+
+@media (min-width: 40rem) {
+  .page-header h1 {
+    font-size: 1.75rem;
+  }
+}

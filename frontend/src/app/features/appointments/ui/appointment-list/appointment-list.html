@@ -1,0 +1,29 @@
+@if (rows().length === 0) {
+  <app-empty-state
+    title="No hay citas para hoy"
+    description="Cuando reserves una cita aparecerá aquí, ordenada por hora de inicio."
+    actionLabel="Crear la primera cita"
+    (action)="createRequested.emit()"
+  />
+} @else {
+  <ul class="list">
+    @for (row of rows(); track row.id) {
+      <li class="appointment">
+        <p class="appointment__time">
+          <app-icon name="clock" />
+          <time [attr.datetime]="row.startTime">{{ row.startTime }}</time>
+        </p>
+
+        <div class="appointment__details">
+          <p class="appointment__client">{{ row.clientName }}</p>
+          <p class="appointment__service">
+            {{ row.serviceName }}
+            <span class="appointment__duration">{{ row.durationLabel }}</span>
+          </p>
+        </div>
+
+        <app-status-badge class="appointment__status" [status]="row.status" />
+      </li>
+    }
+  </ul>
+}
