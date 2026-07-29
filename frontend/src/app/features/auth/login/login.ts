@@ -10,7 +10,6 @@ function delay(ms: number): Promise<void> {
 
 /**
  * Pantalla de acceso. Valida el formulario con Signal Forms y simula una
- * autenticación (aún no hay backend): solo la cuenta de demostración entra.
  */
 @Component({
   selector: 'app-login',
