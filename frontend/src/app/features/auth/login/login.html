@@ -26,7 +26,7 @@
           <span>Correo electrónico</span>
           <span class="login__input">
             <app-icon name="mail" />
-            <input id="login-email" type="email" autocomplete="email" placeholder="tu@salon.com"
+            <input id="login-email" type="email" autocomplete="email" placeholder="tu@email.com"
               [formField]="loginForm.email" />
           </span>
           @if (loginForm.email().touched() && loginForm.email().invalid()) {

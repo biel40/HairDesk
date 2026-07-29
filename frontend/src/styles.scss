@@ -154,11 +154,104 @@ textarea {
   white-space: nowrap;
 }
 
+/* Transiciones de ruta — View Transitions API nativa.
+   El navegador captura una foto de la pantalla saliente y otra de la entrante y
+   anima pseudo-elementos sobre esas capturas: son texturas estáticas, así que el
+   coste es de composición pura, sin repintado del árbol DOM. */
+
+/* Por defecto la capa saliente se queda fija y la entrante aparece encima.
+   Evita el atenuado que produce el cross-fade con `plus-lighter` sobre un tema
+   oscuro, y en navegaciones internas (sidebar) resulta imperceptible. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  animation: none;
+}
+
+::view-transition-new(root) {
+  z-index: 1;
+  animation: hd-vt-fade-in 200ms ease both;
+}
+
+@keyframes hd-vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Entrada a la aplicación desde el login: disolución de salida + revelado
+   circular orgánico en la entrada, con acomodo final tipo "resorte".
+   Es una transición ÚNICA por navegación (no una animación en bucle), así que
+   animar `filter` aquí es aceptable: el coste es puntual, no continuo. */
+html.hd-vt-auth::view-transition-old(root) {
+  animation: hd-vt-auth-out 680ms cubic-bezier(0.55, 0, 1, 0.45) both;
+}
+
+html.hd-vt-auth::view-transition-new(root) {
+  animation: hd-vt-auth-in 980ms linear both;
+}
+
+/* El login se aleja disolviéndose: se desenfoca, se aclara y se eleva
+   levemente, con una pequeña rotación que rompe la rigidez de un simple
+   scale/fade. */
+@keyframes hd-vt-auth-out {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+  40% {
+    opacity: 0.65;
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(22px);
+    transform: scale(1.16) translateY(-2%) rotate(-1.2deg);
+  }
+}
+
+/* El dashboard se revela desde un círculo que crece en dos tiempos: primero
+   una expansión rápida que decelera (ease-out-expo) y, en el último tramo,
+   un asentamiento con ligerísimo rebote (back-ease) — el matiz que hace que
+   el gesto se sienta "vivo" en vez de mecánico. La `animation-timing-function`
+   declarada en cada paso controla el tramo que empieza en ese punto. */
+@keyframes hd-vt-auth-in {
+  0% {
+    clip-path: circle(0% at 50% 78%);
+    opacity: 0;
+    transform: scale(1.06) rotate(-1deg);
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  8% {
+    opacity: 1;
+  }
+  62% {
+    clip-path: circle(68% at 50% 78%);
+    transform: scale(1.015) rotate(0.3deg);
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  100% {
+    clip-path: circle(150% at 50% 78%);
+    transform: scale(1) rotate(0deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /* Los pseudo-elementos de View Transitions no los alcanza el selector `*`. */
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }
