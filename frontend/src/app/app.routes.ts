@@ -4,6 +4,16 @@ import { MainLayout } from './layout/main-layout/main-layout';
 
 export const routes: Routes = [
   {
+    path: 'login',
+    title: 'Iniciar sesión · HairDesk',
+    loadComponent: () => import('./features/auth/login/login').then((m) => m.Login),
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'login',
+  },
+  {
     path: '',
     component: MainLayout,
     children: [
@@ -35,5 +45,5 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: '**', redirectTo: 'dashboard' },
+  { path: '**', redirectTo: 'login' },
 ];

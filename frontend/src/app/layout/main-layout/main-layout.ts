@@ -1,6 +1,7 @@
 import { Component, ElementRef, afterRenderEffect, inject, signal, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import { Auth } from '../../core/services/auth';
 import { SalonContext } from '../../core/services/salon-context';
 import { Icon } from '../../shared/ui/icon/icon';
 import { Sidebar } from '../sidebar/sidebar';
@@ -16,6 +17,7 @@ import { Sidebar } from '../sidebar/sidebar';
 })
 export class MainLayout {
   private readonly salonContext = inject(SalonContext);
+  private readonly auth = inject(Auth);
 
   protected readonly salon = this.salonContext.salon;
   protected readonly user = this.salonContext.currentUser;
@@ -47,5 +49,10 @@ export class MainLayout {
 
   protected closeMenu(): void {
     this.menuOpen.set(false);
+  }
+
+  protected async logout(): Promise<void> {
+    this.closeMenu();
+    await this.auth.logout();
   }
 }

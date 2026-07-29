@@ -1,0 +1,94 @@
+<div class="login">
+  <div class="login__aurora" aria-hidden="true">
+    <span class="login__blob login__blob--one"></span>
+    <span class="login__blob login__blob--two"></span>
+    <span class="login__blob login__blob--three"></span>
+  </div>
+  <div class="login__grain" aria-hidden="true"></div>
+
+  <div class="login__panel">
+    <section class="login__brand">
+      <span class="login__mark"><app-icon name="scissors" /></span>
+      <h1 class="login__product">HairDesk</h1>
+      <p class="login__tagline">La gestión de tu salón, con estilo.</p>
+
+      <blockquote class="login__quote">
+        <p>
+          «Desde que usamos HairDesk la agenda se llena sola y el equipo llega tranquilo cada
+          mañana.»
+        </p>
+        <cite>— Marta, Peluquería Bella</cite>
+      </blockquote>
+    </section>
+
+    <section class="login__card hd-card" aria-labelledby="login-heading">
+      <h2 id="login-heading">Bienvenido de nuevo</h2>
+      <p class="login__subtitle">Ingresa tus datos para abrir la agenda de hoy.</p>
+
+      @if (authError(); as message) {
+      <p class="login__alert" role="alert">{{ message }}</p>
+      }
+
+      <form [formRoot]="loginForm" class="login__form" novalidate>
+        <label class="login__field" for="login-email">
+          <span>Correo electrónico</span>
+          <span class="login__input">
+            <app-icon name="mail" />
+            <input id="login-email" type="email" autocomplete="email" placeholder="tu@salon.com"
+              [formField]="loginForm.email" />
+          </span>
+          @if (loginForm.email().touched() && loginForm.email().invalid()) {
+          <small class="login__error">{{ loginForm.email().errors()[0].message }}</small>
+          }
+        </label>
+
+        <label class="login__field" for="login-password">
+          <span>Contraseña</span>
+          <span class="login__input">
+            <app-icon name="lock" />
+            <input id="login-password" [type]="showPassword() ? 'text' : 'password'" autocomplete="current-password"
+              placeholder="••••••••" [formField]="loginForm.password" />
+            <button type="button" class="login__toggle" (click)="togglePasswordVisibility()"
+              [attr.aria-pressed]="showPassword()">
+              <app-icon [name]="showPassword() ? 'eye-off' : 'eye'" />
+              <span class="hd-visually-hidden">{{ showPassword() ? 'Ocultar' : 'Mostrar' }} contraseña</span>
+            </button>
+          </span>
+          @if (loginForm.password().touched() && loginForm.password().invalid()) {
+          <small class="login__error">{{ loginForm.password().errors()[0].message }}</small>
+          }
+        </label>
+
+        <div class="login__row">
+          <label class="login__remember">
+            <input type="checkbox" [checked]="remember()" (change)="toggleRemember($any($event.target).checked)" />
+            Recordarme
+          </label>
+
+          <button type="button" class="login__forgot" (click)="requestPasswordReset()">
+            ¿Olvidaste tu contraseña?
+          </button>
+        </div>
+
+        @if (forgotNotice(); as notice) {
+        <p class="login__notice" role="status">{{ notice }}</p>
+        }
+
+        <button type="submit" class="hd-button hd-button--primary login__submit"
+          [disabled]="loginForm().invalid() || submitting()">
+          @if (submitting()) {
+          <span class="login__spinner" aria-hidden="true"></span>
+          Entrando…
+          } @else {
+          Iniciar sesión
+          }
+        </button>
+      </form>
+
+      <p class="login__hint">
+        Cuenta de demostración: <strong>demo&#64;hairdesk.com</strong> ·
+        <strong>estilo2024</strong>
+      </p>
+    </section>
+  </div>
+</div>

@@ -26,7 +26,12 @@
       <span class="hd-visually-hidden">Cerrar menú de navegación</span>
     </button>
 
-    <app-sidebar [salon]="salon()" [user]="user()" (navigated)="closeMenu()" />
+    <app-sidebar
+      [salon]="salon()"
+      [user]="user()"
+      (navigated)="closeMenu()"
+      (loggedOut)="logout()"
+    />
   </aside>
 
   @if (menuOpen()) {

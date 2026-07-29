@@ -32,4 +32,8 @@
     <span class="user__name">{{ userFullName() }}</span>
     <span class="user__role">{{ user().role }}</span>
   </span>
+  <button type="button" class="user__logout" (click)="logout()">
+    <app-icon name="logout" />
+    <span class="hd-visually-hidden">Cerrar sesión</span>
+  </button>
 </div>

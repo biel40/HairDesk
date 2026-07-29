@@ -10,7 +10,12 @@ export type IconName =
   | 'close'
   | 'plus'
   | 'clock'
-  | 'calendar-off';
+  | 'calendar-off'
+  | 'mail'
+  | 'lock'
+  | 'eye'
+  | 'eye-off'
+  | 'logout';
 
 /**
  * Iconografía decorativa en SVG inline. Siempre `aria-hidden`:
@@ -73,6 +78,29 @@ export type IconName =
         @case ('calendar-off') {
           <rect x="3" y="5" width="18" height="16" rx="2" />
           <path d="M3 10h18M8 3v4M16 3v4M9.5 15.5h5" />
+        }
+        @case ('mail') {
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="m3 7 9 6 9-6" />
+        }
+        @case ('lock') {
+          <rect x="4" y="11" width="16" height="10" rx="2" />
+          <path d="M7.5 11V7.5a4.5 4.5 0 0 1 9 0V11" />
+        }
+        @case ('eye') {
+          <path d="M2 12s3.75-7 10-7 10 7 10 7-3.75 7-10 7-10-7-10-7Z" />
+          <circle cx="12" cy="12" r="2.75" />
+        }
+        @case ('eye-off') {
+          <path
+            d="M16.6 16.6A9.9 9.9 0 0 1 12 18c-6.25 0-10-6-10-6a17.9 17.9 0 0 1 4.6-5.2M9.15 4.6A9.1 9.1 0 0 1 12 4c6.25 0 10 6 10 6a17.6 17.6 0 0 1-2 2.9M14.1 14.1a2.75 2.75 0 0 1-3.9-3.9"
+          />
+          <path d="M2 2l18 18" />
+        }
+        @case ('logout') {
+          <path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3" />
+          <path d="M16 16l4-4-4-4" />
+          <path d="M20 12H9" />
         }
       }
     </svg>

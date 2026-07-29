@@ -126,3 +126,27 @@
   font-size: 0.8125rem;
   color: var(--hd-text-muted);
 }
+
+.user__logout {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-inline-start: auto;
+  border: 1px solid var(--hd-border);
+  border-radius: var(--hd-radius-sm);
+  background-color: transparent;
+  color: var(--hd-text-muted);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.user__logout:hover,
+.user__logout:focus-visible {
+  background-color: var(--hd-surface-muted);
+  color: var(--hd-accent);
+}
