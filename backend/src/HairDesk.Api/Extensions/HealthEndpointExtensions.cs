@@ -1,5 +1,4 @@
 using HairDesk.Infrastructure.Persistence;
-using Microsoft.AspNetCore.Http;
 
 namespace HairDesk.Api.Extensions;
 
