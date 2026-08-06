@@ -11,6 +11,8 @@
       <li
         class="appointment"
         [class.appointment--confirmed]="row.appointment.status === 'confirmed'"
+        [class.appointment--pending]="row.appointment.status === 'pending'"
+        [class.appointment--completed]="row.appointment.status === 'completed'"
         role="button"
         tabindex="0"
         animate.enter="appointment--entering"

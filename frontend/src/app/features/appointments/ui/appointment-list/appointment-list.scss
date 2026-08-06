@@ -44,6 +44,28 @@
   border-inline-start-color: var(--hd-success-text);
 }
 
+.appointment--pending {
+  background-color: color-mix(in srgb, var(--hd-warning-bg) 72%, var(--hd-surface));
+  border-inline-start-color: color-mix(in srgb, var(--hd-warning-text) 45%, transparent);
+}
+
+.appointment--pending:hover,
+.appointment--pending:focus-visible {
+  background-color: color-mix(in srgb, var(--hd-warning-bg) 88%, var(--hd-surface));
+  border-inline-start-color: var(--hd-warning-text);
+}
+
+.appointment--completed {
+  background-color: color-mix(in srgb, var(--hd-info-bg) 72%, var(--hd-surface));
+  border-inline-start-color: color-mix(in srgb, var(--hd-info-text) 45%, transparent);
+}
+
+.appointment--completed:hover,
+.appointment--completed:focus-visible {
+  background-color: color-mix(in srgb, var(--hd-info-bg) 88%, var(--hd-surface));
+  border-inline-start-color: var(--hd-info-text);
+}
+
 .appointment--entering {
   animation: appointment-enter 220ms ease-out backwards;
 }

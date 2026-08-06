@@ -37,7 +37,11 @@ const STATUS_LABELS: Readonly<Record<AppointmentStatus, string>> = {
       color: var(--hd-warning-text);
     }
 
-    .badge--completed,
+    .badge--completed {
+      background-color: var(--hd-info-bg);
+      color: var(--hd-info-text);
+    }
+
     .badge--cancelled {
       background-color: var(--hd-neutral-bg);
       color: var(--hd-neutral-text);
