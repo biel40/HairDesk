@@ -3,9 +3,10 @@ import { Component, computed, input } from '@angular/core';
 import { AppointmentStatus } from '../../../core/models/appointment.model';
 
 const STATUS_LABELS: Readonly<Record<AppointmentStatus, string>> = {
-  confirmada: 'Confirmada',
-  pendiente: 'Pendiente',
-  completada: 'Completada',
+  confirmed: 'Confirmada',
+  pending: 'Pendiente',
+  completed: 'Completada',
+  cancelled: 'Cancelada',
 };
 
 @Component({
@@ -26,17 +27,18 @@ const STATUS_LABELS: Readonly<Record<AppointmentStatus, string>> = {
       white-space: nowrap;
     }
 
-    .badge--confirmada {
+    .badge--confirmed {
       background-color: var(--hd-success-bg);
       color: var(--hd-success-text);
     }
 
-    .badge--pendiente {
+    .badge--pending {
       background-color: var(--hd-warning-bg);
       color: var(--hd-warning-text);
     }
 
-    .badge--completada {
+    .badge--completed,
+    .badge--cancelled {
       background-color: var(--hd-neutral-bg);
       color: var(--hd-neutral-text);
     }

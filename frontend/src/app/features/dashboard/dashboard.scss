@@ -23,13 +23,38 @@
 }
 
 .notice {
+  position: fixed;
+  z-index: 120;
+  right: 1rem;
+  bottom: 1rem;
+  max-width: min(24rem, calc(100vw - 2rem));
   margin-bottom: 1.25rem;
   padding: 0.75rem 1rem;
-  border: 1px solid var(--hd-border);
+  border: 1px solid color-mix(in srgb, var(--hd-success-text) 35%, var(--hd-border));
   border-radius: var(--hd-radius-sm);
-  background-color: var(--hd-accent-soft);
-  color: var(--hd-accent);
+  background-color: var(--hd-success-bg);
+  box-shadow: var(--hd-shadow-md);
+  color: var(--hd-success-text);
   font-size: 0.9375rem;
+}
+
+.notice--entering {
+  animation: notice-enter 200ms ease-out backwards;
+}
+
+.notice--leaving {
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition:
+    opacity 150ms ease-in,
+    transform 150ms ease-in;
+}
+
+@keyframes notice-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
 }
 
 .stats {

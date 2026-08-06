@@ -1,0 +1,114 @@
+:host {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+}
+
+.dialog-backdrop {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  background-color: var(--hd-overlay);
+}
+
+.dialog-panel {
+  width: min(100%, 34rem);
+  height: 100%;
+  overflow-y: auto;
+  background-color: var(--hd-surface);
+  border-inline-start: 1px solid var(--hd-border-strong);
+  box-shadow: var(--hd-shadow-md);
+}
+
+.dialog-header {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+  background-color: var(--hd-surface);
+  border-bottom: 1px solid var(--hd-border);
+}
+
+.dialog-header h2 {
+  font-size: 1.25rem;
+}
+
+.dialog-header p {
+  margin-top: 0.2rem;
+  color: var(--hd-text-muted);
+  font-size: 0.9rem;
+}
+
+.dialog-close {
+  display: inline-grid;
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: var(--hd-radius-sm);
+  background: transparent;
+  color: var(--hd-text-muted);
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+.dialog-close:hover {
+  background-color: var(--hd-surface-muted);
+  color: var(--hd-text);
+  transform: translateY(-1px);
+}
+
+.dialog-content {
+  padding: 1.25rem;
+}
+
+.dialog-backdrop--entering {
+  animation: dialog-fade 180ms ease-out backwards;
+}
+
+.dialog-backdrop--leaving {
+  opacity: 0;
+  transition: opacity 150ms ease-in;
+}
+
+.dialog-panel--entering {
+  animation: dialog-slide 220ms ease-out backwards;
+}
+
+.dialog-panel--leaving {
+  opacity: 0;
+  transform: translateX(1.5rem);
+  transition:
+    opacity 150ms ease-in,
+    transform 150ms ease-in;
+}
+
+@keyframes dialog-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes dialog-slide {
+  from {
+    opacity: 0;
+    transform: translateX(1.5rem);
+  }
+}
+
+@media (min-width: 40rem) {
+  .dialog-content,
+  .dialog-header {
+    padding: 1.5rem;
+  }
+}

@@ -7,22 +7,30 @@
   />
 } @else {
   <ul class="list">
-    @for (row of rows(); track row.id) {
-      <li class="appointment">
+    @for (row of rows(); track row.appointment.id) {
+      <li
+        class="appointment"
+        [class.appointment--confirmed]="row.appointment.status === 'confirmed'"
+        role="button"
+        tabindex="0"
+        animate.enter="appointment--entering"
+        (click)="selectAppointment(row, $event)"
+        (keydown)="selectAppointment(row, $event)"
+      >
         <p class="appointment__time">
           <app-icon name="clock" />
-          <time [attr.datetime]="row.startTime">{{ row.startTime }}</time>
+          <time [attr.datetime]="row.appointment.startTime">{{ row.appointment.startTime }}</time>
         </p>
 
         <div class="appointment__details">
-          <p class="appointment__client">{{ row.clientName }}</p>
+          <p class="appointment__client">{{ row.appointment.clientName }}</p>
           <p class="appointment__service">
-            {{ row.serviceName }}
+            {{ row.appointment.serviceName }}
             <span class="appointment__duration">{{ row.durationLabel }}</span>
           </p>
         </div>
 
-        <app-status-badge class="appointment__status" [status]="row.status" />
+        <app-status-badge class="appointment__status" [status]="row.appointment.status" />
       </li>
     }
   </ul>

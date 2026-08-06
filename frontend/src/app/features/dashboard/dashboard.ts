@@ -1,12 +1,14 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, DOCUMENT, inject, OnDestroy, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
-import { Appointment } from '../../core/models/appointment.model';
+import { Appointment, NewAppointment } from '../../core/models/appointment.model';
 import { AppointmentRepository } from '../../core/services/appointment.repository';
 import { DashboardRepository } from '../../core/services/dashboard.repository';
 import { SalonContext } from '../../core/services/salon-context';
 import { Icon, IconName } from '../../shared/ui/icon/icon';
 import { StatCard } from '../../shared/ui/stat-card/stat-card';
+import { AppointmentDetail } from '../appointments/appointment-detail/appointment-detail';
+import { AppointmentForm } from '../appointments/appointment-form/appointment-form';
 import { AppointmentList } from '../appointments/ui/appointment-list/appointment-list';
 
 interface SummaryCard {
@@ -42,18 +44,17 @@ function capitalise(text: string): string {
 
 @Component({
   selector: 'app-dashboard',
-  imports: [AppointmentList, Icon, StatCard],
+  imports: [AppointmentDetail, AppointmentForm, AppointmentList, Icon, StatCard],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
-export class Dashboard {
+export class Dashboard implements OnDestroy {
+  private readonly document = inject(DOCUMENT);
   private readonly appointmentRepository = inject(AppointmentRepository);
   private readonly dashboardRepository = inject(DashboardRepository);
   private readonly salonContext = inject(SalonContext);
 
-  protected readonly appointments = toSignal(this.appointmentRepository.findToday(), {
-    initialValue: [] as readonly Appointment[],
-  });
+  protected readonly appointments = this.appointmentRepository.todayAppointments;
 
   private readonly stats = toSignal(this.dashboardRepository.findTodayStats(), {
     initialValue: null,
@@ -75,7 +76,7 @@ export class Dashboard {
     return [
       {
         label: 'Citas de hoy',
-        value: String(stats.todayAppointments),
+        value: String(this.appointments().length),
         icon: 'calendar',
       },
       {
@@ -91,7 +92,7 @@ export class Dashboard {
       },
       {
         label: 'Próxima cita',
-        value: stats.nextAppointmentTime ?? 'Sin citas',
+        value: this.nextAppointment()?.startTime ?? 'Sin citas',
         icon: 'clock',
       },
     ];
@@ -102,9 +103,71 @@ export class Dashboard {
     return total === 1 ? '1 cita programada' : `${total} citas programadas`;
   });
 
-  protected readonly notice = signal('');
+  private readonly nextAppointment = computed(() => {
+    const now = new Date();
+    const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+    return this.appointments().find(
+      (appointment) =>
+        appointment.status !== 'completed' &&
+        appointment.status !== 'cancelled' &&
+        appointment.startTime >= currentTime,
+    );
+  });
 
-  protected createAppointment(): void {
-    this.notice.set('La creación de citas estará disponible muy pronto.');
+  protected readonly creatingAppointment = signal(false);
+  protected readonly selectedAppointment = signal<Appointment | null>(null);
+  protected readonly notice = signal('');
+  private triggerElement: HTMLElement | null = null;
+  private noticeTimer: ReturnType<typeof setTimeout> | null = null;
+
+  protected createAppointment(event?: Event): void {
+    this.triggerElement = event?.currentTarget instanceof HTMLElement ? event.currentTarget : null;
+    this.creatingAppointment.set(true);
+  }
+
+  protected openAppointmentDetail(appointment: Appointment, event?: Event): void {
+    this.triggerElement =
+      event?.currentTarget instanceof HTMLElement
+        ? event.currentTarget
+        : this.document.activeElement instanceof HTMLElement
+          ? this.document.activeElement
+          : null;
+    this.selectedAppointment.set(appointment);
+  }
+
+  ngOnDestroy(): void {
+    if (this.noticeTimer !== null) {
+      clearTimeout(this.noticeTimer);
+    }
+  }
+
+  protected saveAppointment(appointment: NewAppointment): void {
+    this.appointmentRepository.create(appointment);
+    this.closeCreatePanel();
+    this.showNotice('Cita creada correctamente.');
+  }
+
+  protected closeCreatePanel(): void {
+    this.creatingAppointment.set(false);
+    this.restoreFocus();
+  }
+
+  protected closeDetailPanel(): void {
+    this.selectedAppointment.set(null);
+    this.restoreFocus();
+  }
+
+  private restoreFocus(): void {
+    const trigger = this.triggerElement;
+    this.triggerElement = null;
+    queueMicrotask(() => trigger?.focus());
+  }
+
+  private showNotice(message: string): void {
+    if (this.noticeTimer !== null) {
+      clearTimeout(this.noticeTimer);
+    }
+    this.notice.set(message);
+    this.noticeTimer = setTimeout(() => this.notice.set(''), 4000);
   }
 }

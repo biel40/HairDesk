@@ -16,7 +16,12 @@
   gap: 0.35rem 0.9rem;
   padding: 0.9rem 1rem;
   border-top: 1px solid var(--hd-border);
-  transition: background-color 0.15s ease;
+  border-inline-start: 3px solid transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
 }
 
 .appointment:first-child {
@@ -25,6 +30,29 @@
 
 .appointment:hover {
   background-color: var(--hd-surface-muted);
+  transform: translateY(-1px);
+}
+
+.appointment--confirmed {
+  background-color: color-mix(in srgb, var(--hd-success-bg) 72%, var(--hd-surface));
+  border-inline-start-color: color-mix(in srgb, var(--hd-success-text) 45%, transparent);
+}
+
+.appointment--confirmed:hover,
+.appointment--confirmed:focus-visible {
+  background-color: color-mix(in srgb, var(--hd-success-bg) 88%, var(--hd-surface));
+  border-inline-start-color: var(--hd-success-text);
+}
+
+.appointment--entering {
+  animation: appointment-enter 220ms ease-out backwards;
+}
+
+@keyframes appointment-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.4rem);
+  }
 }
 
 .appointment__time {

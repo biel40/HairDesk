@@ -1,0 +1,68 @@
+<app-appointment-dialog
+  title="Detalle de la cita"
+  description="Información completa de la reserva."
+  (closeRequested)="closed.emit()"
+>
+  <div class="detail">
+    <div class="detail__status">
+      <span>Estado</span>
+      <app-status-badge [status]="appointment().status" />
+    </div>
+
+    <dl class="detail__list">
+      <div>
+        <dt>Cliente</dt>
+        <dd class="detail__primary">{{ appointment().clientName }}</dd>
+      </div>
+      <div>
+        <dt>Teléfono</dt>
+        <dd>
+          <a [href]="'tel:' + appointment().clientPhone">{{ appointment().clientPhone }}</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Servicio</dt>
+        <dd>{{ appointment().serviceName }}</dd>
+      </div>
+      <div>
+        <dt>Fecha</dt>
+        <dd>
+          <time [attr.datetime]="appointment().date">{{ dateLabel() }}</time>
+        </dd>
+      </div>
+      <div>
+        <dt>Horario estimado</dt>
+        <dd>
+          <time [attr.datetime]="appointment().startTime">{{ appointment().startTime }}</time>
+          –
+          <time [attr.datetime]="endTime()">{{ endTime() }}</time>
+        </dd>
+      </div>
+      <div>
+        <dt>Duración</dt>
+        <dd>{{ durationLabel() }}</dd>
+      </div>
+      <div class="detail__notes">
+        <dt>Notas</dt>
+        <dd>{{ appointment().notes || 'Sin notas para esta cita.' }}</dd>
+      </div>
+    </dl>
+
+    <footer class="detail__actions">
+      <button
+        type="button"
+        class="hd-button hd-button--ghost"
+        disabled
+        aria-describedby="edit-unavailable"
+      >
+        Editar cita
+      </button>
+      <span id="edit-unavailable" class="hd-visually-hidden"
+        >La edición estará disponible próximamente.</span
+      >
+      <button type="button" class="hd-button hd-button--primary" (click)="closed.emit()">
+        Cerrar
+      </button>
+    </footer>
+  </div>
+</app-appointment-dialog>

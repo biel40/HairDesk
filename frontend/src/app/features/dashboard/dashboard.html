@@ -4,14 +4,16 @@
     <p class="page-header__date">{{ todayLabel }}</p>
   </div>
 
-  <button type="button" class="hd-button hd-button--primary" (click)="createAppointment()">
+  <button type="button" class="hd-button hd-button--primary" (click)="createAppointment($event)">
     <app-icon name="plus" />
     Nueva cita
   </button>
 </header>
 
 @if (notice(); as message) {
-  <p class="notice" role="status">{{ message }}</p>
+  <p class="notice" role="status" animate.enter="notice--entering" animate.leave="notice--leaving">
+    {{ message }}
+  </p>
 }
 
 <section class="stats" aria-labelledby="titulo-resumen">
@@ -36,5 +38,17 @@
     <p class="appointments__count">{{ appointmentsCountLabel() }}</p>
   </header>
 
-  <app-appointment-list [appointments]="appointments()" (createRequested)="createAppointment()" />
+  <app-appointment-list
+    [appointments]="appointments()"
+    (createRequested)="createAppointment()"
+    (appointmentSelected)="openAppointmentDetail($event)"
+  />
 </section>
+
+@if (creatingAppointment()) {
+  <app-appointment-form (saved)="saveAppointment($event)" (closed)="closeCreatePanel()" />
+}
+
+@if (selectedAppointment(); as appointment) {
+  <app-appointment-detail [appointment]="appointment" (closed)="closeDetailPanel()" />
+}

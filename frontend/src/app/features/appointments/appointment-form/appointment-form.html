@@ -1,0 +1,122 @@
+<app-appointment-dialog
+  title="Nueva cita"
+  description="Añade la cita a la agenda del salón."
+  (closeRequested)="requestClose()"
+>
+  <form [formRoot]="appointmentForm" class="appointment-form" novalidate>
+    <fieldset class="appointment-form__section">
+      <legend>Cliente</legend>
+
+      <label class="field" for="appointment-client-name">
+        <span>Nombre del cliente</span>
+        <input
+          id="appointment-client-name"
+          type="text"
+          autocomplete="off"
+          autofocus
+          [formField]="appointmentForm.clientName"
+        />
+        @if (appointmentForm.clientName().touched() && appointmentForm.clientName().invalid()) {
+          <small>{{ appointmentForm.clientName().errors()[0].message }}</small>
+        }
+      </label>
+
+      <label class="field" for="appointment-phone">
+        <span>Teléfono</span>
+        <input
+          id="appointment-phone"
+          type="tel"
+          autocomplete="off"
+          [formField]="appointmentForm.clientPhone"
+        />
+        @if (appointmentForm.clientPhone().touched() && appointmentForm.clientPhone().invalid()) {
+          <small>{{ appointmentForm.clientPhone().errors()[0].message }}</small>
+        }
+      </label>
+    </fieldset>
+
+    <fieldset class="appointment-form__section">
+      <legend>Detalles de la cita</legend>
+
+      <label class="field appointment-form__wide" for="appointment-service">
+        <span>Servicio</span>
+        <span class="select-wrap">
+          <select id="appointment-service" [formField]="appointmentForm.serviceName">
+            <option value="">Selecciona un servicio</option>
+            <option value="Corte y peinado">Corte y peinado</option>
+            <option value="Tinte raíz">Tinte raíz</option>
+            <option value="Mechas balayage">Mechas balayage</option>
+            <option value="Recogido">Recogido</option>
+            <option value="Tratamiento capilar">Tratamiento capilar</option>
+          </select>
+        </span>
+        @if (appointmentForm.serviceName().touched() && appointmentForm.serviceName().invalid()) {
+          <small>{{ appointmentForm.serviceName().errors()[0].message }}</small>
+        }
+      </label>
+
+      <label class="field" for="appointment-date">
+        <span>Fecha</span>
+        <input id="appointment-date" type="date" [formField]="appointmentForm.date" />
+        @if (appointmentForm.date().touched() && appointmentForm.date().invalid()) {
+          <small>{{ appointmentForm.date().errors()[0].message }}</small>
+        }
+      </label>
+
+      <label class="field" for="appointment-time">
+        <span>Hora de inicio</span>
+        <input id="appointment-time" type="time" [formField]="appointmentForm.startTime" />
+        @if (appointmentForm.startTime().touched() && appointmentForm.startTime().invalid()) {
+          <small>{{ appointmentForm.startTime().errors()[0].message }}</small>
+        }
+      </label>
+
+      <label class="field" for="appointment-duration">
+        <span>Duración</span>
+        <span class="select-wrap">
+          <select id="appointment-duration" [formField]="appointmentForm.durationMinutes">
+            <option value="30">30 minutos</option>
+            <option value="45">45 minutos</option>
+            <option value="60">1 hora</option>
+            <option value="90">1 hora 30 minutos</option>
+            <option value="120">2 horas</option>
+          </select>
+        </span>
+      </label>
+
+      <label class="field" for="appointment-status">
+        <span>Estado</span>
+        <span class="select-wrap">
+          <select id="appointment-status" [formField]="appointmentForm.status">
+            <option value="pending">Pendiente</option>
+            <option value="confirmed">Confirmada</option>
+            <option value="completed">Completada</option>
+            <option value="cancelled">Cancelada</option>
+          </select>
+        </span>
+      </label>
+    </fieldset>
+
+    <fieldset class="appointment-form__section">
+      <legend>Notas</legend>
+
+      <label class="field appointment-form__wide" for="appointment-notes">
+        <span>Notas <span class="field__optional">Opcional</span></span>
+        <textarea id="appointment-notes" rows="4" [formField]="appointmentForm.notes"></textarea>
+      </label>
+    </fieldset>
+
+    <footer class="appointment-form__actions appointment-form__wide">
+      <button type="button" class="hd-button hd-button--ghost" (click)="requestClose()">
+        Cancelar
+      </button>
+      <button
+        type="submit"
+        class="hd-button hd-button--primary"
+        [disabled]="appointmentForm().invalid()"
+      >
+        Guardar cita
+      </button>
+    </footer>
+  </form>
+</app-appointment-dialog>

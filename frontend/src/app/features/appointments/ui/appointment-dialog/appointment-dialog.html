@@ -1,0 +1,36 @@
+<div
+  class="dialog-backdrop"
+  animate.enter="dialog-backdrop--entering"
+  animate.leave="dialog-backdrop--leaving"
+  (click)="requestBackdropClose($event)"
+>
+  <section
+    class="dialog-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="appointment-dialog-title"
+    [attr.aria-describedby]="description() ? 'appointment-dialog-description' : null"
+    animate.enter="dialog-panel--entering"
+    animate.leave="dialog-panel--leaving"
+  >
+    <header class="dialog-header">
+      <div>
+        <h2 id="appointment-dialog-title">{{ title() }}</h2>
+        @if (description()) {
+          <p id="appointment-dialog-description">{{ description() }}</p>
+        }
+      </div>
+      <button
+        type="button"
+        class="dialog-close"
+        aria-label="Cerrar"
+        (click)="closeRequested.emit()"
+      >
+        <app-icon name="close" />
+      </button>
+    </header>
+    <div class="dialog-content">
+      <ng-content />
+    </div>
+  </section>
+</div>

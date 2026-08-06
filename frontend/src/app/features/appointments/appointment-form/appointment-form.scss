@@ -1,0 +1,150 @@
+.appointment-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.appointment-form__section {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.appointment-form__section + .appointment-form__section {
+  margin-top: 0.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--hd-border);
+}
+
+.appointment-form__section legend {
+  grid-column: 1 / -1;
+  padding: 0;
+  color: var(--hd-text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--hd-border-strong);
+  border-radius: var(--hd-radius-sm);
+  background-color: var(--hd-bg);
+  color: var(--hd-text);
+  font-weight: 400;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field input:hover,
+.field select:hover,
+.field textarea:hover {
+  border-color: var(--hd-text-muted);
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  outline: none;
+  border-color: var(--hd-accent);
+  box-shadow: 0 0 0 3px rgb(224 138 109 / 18%);
+}
+
+.select-wrap {
+  position: relative;
+  display: block;
+}
+
+.select-wrap select {
+  appearance: none;
+  padding-inline-end: 2.25rem;
+}
+
+.select-wrap::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0.85rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: var(--hd-text-muted);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: background-color 150ms ease;
+}
+
+.select-wrap:focus-within::after {
+  background-color: var(--hd-accent);
+}
+
+.field small {
+  color: var(--hd-accent-hover);
+  font-weight: 400;
+}
+
+.field__optional {
+  color: var(--hd-text-muted);
+  font-weight: 400;
+}
+
+.appointment-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--hd-border);
+}
+
+.appointment-form__actions .hd-button {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+
+.appointment-form__actions .hd-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.appointment-form__actions .hd-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+@media (min-width: 32rem) {
+  .appointment-form,
+  .appointment-form__section {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .appointment-form__wide {
+    grid-column: 1 / -1;
+  }
+}

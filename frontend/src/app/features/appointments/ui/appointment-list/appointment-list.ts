@@ -5,7 +5,8 @@ import { EmptyState } from '../../../../shared/ui/empty-state/empty-state';
 import { Icon } from '../../../../shared/ui/icon/icon';
 import { StatusBadge } from '../../../../shared/ui/status-badge/status-badge';
 
-interface AppointmentRow extends Appointment {
+interface AppointmentRow {
+  readonly appointment: Appointment;
   readonly durationLabel: string;
 }
 
@@ -30,11 +31,24 @@ export class AppointmentList {
   readonly appointments = input.required<readonly Appointment[]>();
 
   readonly createRequested = output<void>();
+  readonly appointmentSelected = output<Appointment>();
 
   protected readonly rows = computed<readonly AppointmentRow[]>(() =>
     this.appointments().map((appointment) => ({
-      ...appointment,
+      appointment,
       durationLabel: formatDuration(appointment.durationMinutes),
     })),
   );
+
+  protected selectAppointment(row: AppointmentRow, event?: Event): void {
+    if (event instanceof KeyboardEvent && event.key !== 'Enter' && event.key !== ' ') {
+      return;
+    }
+
+    event?.preventDefault();
+    if (event?.currentTarget instanceof HTMLElement) {
+      event.currentTarget.focus();
+    }
+    this.appointmentSelected.emit(row.appointment);
+  }
 }
