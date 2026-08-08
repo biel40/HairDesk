@@ -11,6 +11,7 @@ export type IconName =
   | 'plus'
   | 'clock'
   | 'calendar-off'
+  | 'search'
   | 'mail'
   | 'lock'
   | 'eye'
@@ -78,6 +79,10 @@ export type IconName =
         @case ('calendar-off') {
           <rect x="3" y="5" width="18" height="16" rx="2" />
           <path d="M3 10h18M8 3v4M16 3v4M9.5 15.5h5" />
+        }
+        @case ('search') {
+          <circle cx="11" cy="11" r="7" />
+          <path d="m20 20-4-4" />
         }
         @case ('mail') {
           <rect x="3" y="5" width="18" height="14" rx="2" />

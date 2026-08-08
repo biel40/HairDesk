@@ -1,0 +1,105 @@
+<header class="page-header">
+  <div>
+    <h1>Clientes</h1>
+    <p>Contactos, preferencias y actividad del salón.</p>
+  </div>
+</header>
+
+<section class="client-summary" aria-labelledby="client-summary-title">
+  <h2 id="client-summary-title" class="hd-visually-hidden">Resumen de clientes</h2>
+  <dl>
+    <div>
+      <dt>Total</dt>
+      <dd data-testid="client-count">{{ clientCountLabel() }}</dd>
+    </div>
+    <div>
+      <dt>Con próxima cita</dt>
+      <dd>{{ upcomingCount() }}</dd>
+    </div>
+    <div>
+      <dt>Clientes VIP</dt>
+      <dd>{{ vipCount() }}</dd>
+    </div>
+  </dl>
+  <p class="client-summary__source">Datos de demostración</p>
+</section>
+
+<section class="hd-card client-directory" aria-labelledby="client-directory-title">
+  <header class="client-directory__header">
+    <div>
+      <h2 id="client-directory-title">Directorio</h2>
+      <p>Consulta rápidamente la ficha y el historial de cada cliente.</p>
+    </div>
+
+    <div class="search-field">
+      <label for="client-search" class="hd-visually-hidden">Buscar clientes</label>
+      <span class="search-field__icon"><app-icon name="search" /></span>
+      <input
+        id="client-search"
+        type="search"
+        placeholder="Buscar por nombre, teléfono o email"
+        autocomplete="off"
+        [value]="searchTerm()"
+        (input)="updateSearch($event)"
+      />
+    </div>
+  </header>
+
+  @if (rows().length > 0) {
+    <div class="client-table-wrap">
+      <table class="client-table">
+        <caption class="hd-visually-hidden">
+          Listado de clientes del salón
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Cliente</th>
+            <th scope="col">Contacto</th>
+            <th scope="col">Última visita</th>
+            <th scope="col">Próxima cita</th>
+            <th scope="col">Actividad</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of rows(); track row.client.id) {
+            <tr class="client-row">
+              <td data-label="Cliente">
+                <div class="client-identity">
+                  <span class="client-identity__avatar" aria-hidden="true">{{ row.initials }}</span>
+                  <div>
+                    <strong>{{ row.fullName }}</strong>
+                    <span class="client-tag" [class]="'client-tag client-tag--' + row.client.tag">
+                      {{ row.tagLabel }}
+                    </span>
+                  </div>
+                </div>
+              </td>
+              <td data-label="Contacto">
+                <a [href]="'tel:' + row.client.phone">{{ row.client.phone }}</a>
+                <a [href]="'mailto:' + row.client.email">{{ row.client.email }}</a>
+              </td>
+              <td data-label="Última visita">{{ row.lastVisitLabel }}</td>
+              <td data-label="Próxima cita">
+                <span [class.client-table__muted]="row.client.nextAppointmentAt === null">
+                  {{ row.nextAppointmentLabel }}
+                </span>
+              </td>
+              <td data-label="Actividad">
+                <strong>{{ row.totalSpentLabel }}</strong>
+                <span>{{ row.client.visitCount }} visitas</span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <app-empty-state
+      icon="users"
+      title="No hay clientes que coincidan"
+      description="Prueba con otro nombre, teléfono o correo electrónico."
+      actionLabel="Limpiar búsqueda"
+      (action)="clearSearch()"
+    />
+  }
+</section>

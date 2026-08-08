@@ -4,7 +4,8 @@ import { Salon, SalonUser } from '../models/salon.model';
 
 /**
  * Contexto del salón y del usuario conectado.
- * De momento son datos simulados; más adelante se cargarán tras la autenticación.
+ * De momento son datos simulados; 
+ * Más adelante se cargarán tras la autenticación.
  */
 @Service()
 export class SalonContext {
@@ -15,8 +16,8 @@ export class SalonContext {
 
   readonly currentUser = signal<SalonUser>({
     id: 'user-01',
-    firstName: 'Laura',
-    lastName: 'Serrano',
-    role: 'Propietaria',
+    firstName: 'Gabriel',
+    lastName: 'Borrás',
+    role: 'Propietario',
   }).asReadonly();
 }
