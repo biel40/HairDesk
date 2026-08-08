@@ -22,6 +22,19 @@ describe('Clients', () => {
     expect(fixture.nativeElement.textContent).toContain('Carmen Aguilar');
   });
 
+  it('shows a local portrait for every client', () => {
+    const fixture = TestBed.createComponent(Clients);
+    fixture.detectChanges();
+
+    const portraits = Array.from(
+      fixture.nativeElement.querySelectorAll('.client-identity__portrait'),
+    ) as HTMLImageElement[];
+
+    expect(portraits).toHaveLength(8);
+    expect(portraits.every((portrait) => portrait.src.includes('/images/clients/'))).toBe(true);
+    expect(portraits.every((portrait) => portrait.alt === '')).toBe(true);
+  });
+
   it('filters clients by name, phone or email', () => {
     const fixture = TestBed.createComponent(Clients);
     fixture.detectChanges();

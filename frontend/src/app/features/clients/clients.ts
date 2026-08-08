@@ -1,3 +1,4 @@
+import { NgOptimizedImage } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
@@ -9,7 +10,6 @@ import { Icon } from '../../shared/ui/icon/icon';
 interface ClientRow {
   readonly client: Client;
   readonly fullName: string;
-  readonly initials: string;
   readonly lastVisitLabel: string;
   readonly nextAppointmentLabel: string;
   readonly totalSpentLabel: string;
@@ -54,7 +54,7 @@ function formatDate(value: string | null, formatter: Intl.DateTimeFormat): strin
 
 @Component({
   selector: 'app-clients',
-  imports: [EmptyState, Icon],
+  imports: [EmptyState, Icon, NgOptimizedImage],
   templateUrl: './clients.html',
   styleUrl: './clients.scss',
 })
@@ -80,7 +80,6 @@ export class Clients {
       .map((client) => ({
         client,
         fullName: `${client.firstName} ${client.lastName}`,
-        initials: `${client.firstName.charAt(0)}${client.lastName.charAt(0)}`,
         lastVisitLabel: formatDate(client.lastVisitAt, DATE_FORMATTER),
         nextAppointmentLabel:
           client.nextAppointmentAt === null

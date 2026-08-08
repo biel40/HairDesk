@@ -199,17 +199,16 @@
   gap: 0.75rem;
 }
 
-.client-identity__avatar {
-  display: grid;
-  flex: 0 0 2.35rem;
-  width: 2.35rem;
-  height: 2.35rem;
-  place-items: center;
+.client-identity__portrait {
+  display: block;
+  flex: 0 0 3rem;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--hd-border-strong);
   border-radius: 50%;
-  background-color: var(--hd-accent-soft);
-  color: var(--hd-accent-hover);
-  font-size: 0.75rem;
-  font-weight: 700;
+  background-color: var(--hd-surface-muted);
+  object-fit: cover;
+  object-position: center;
 }
 
 .client-tag {

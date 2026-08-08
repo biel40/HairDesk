@@ -9,7 +9,6 @@
   <h2 id="client-summary-title" class="hd-visually-hidden">Resumen de clientes</h2>
   <dl>
     <div>
-      <dt>Total</dt>
       <dd data-testid="client-count">{{ clientCountLabel() }}</dd>
     </div>
     <div>
@@ -65,7 +64,14 @@
             <tr class="client-row">
               <td data-label="Cliente">
                 <div class="client-identity">
-                  <span class="client-identity__avatar" aria-hidden="true">{{ row.initials }}</span>
+                  <img
+                    class="client-identity__portrait"
+                    [ngSrc]="row.client.avatarUrl"
+                    width="48"
+                    height="48"
+                    priority
+                    alt=""
+                  />
                   <div>
                     <strong>{{ row.fullName }}</strong>
                     <span class="client-tag" [class]="'client-tag client-tag--' + row.client.tag">
